@@ -1,0 +1,29 @@
+pH: 6.5 - 7.0
+Error warning +7.0 for plants +8 for everything
+Error warning -5 for everything and -6.5 for fish
+<6.6 Warning "Take Action: add lime to boost pH level"
+>7 Warning: Nutrient lockout occuring
+>8 Warning: "Danger! Add acid to lower pH level"
+
+Temp: 25 - 30 Optimal for bacteria growth!
+Water <18 bacterial growth rate decreased by 50%
+>8 but <10 decresed by 75%
+<4 no activity will occur
+Nitrifying bacteria will die at or <0 or >49
+
+Plants require 18 - 25 degrees Optimal for plants
+
+Nitrates: >150ppm consider adding another grow bed
+	  <300ppm warning for fish
+
+Ammonia: > 0.75ppm High reading! Check for dead fish.
+	 > 1ppm stop feeding fish
+	 > 2ppm change 1/3 of water
+
+Nitrite: > 0.75ppm High reading! You may have damaged bacteria. 
+	 > 1ppm change 1/3 of water Warning! Toxic to fish.
+
+DO level: <5 fish will die "Oxygen level low! Raise water temp or check aeration systems.
+
+EC reading: Log EC reading.
+
