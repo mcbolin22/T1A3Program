@@ -1,5 +1,6 @@
 import csv
 import datetime
+from statistics import mean, median, stdev
 
 def get_user_input(prompt, data_type, min_val, max_val):
   while True:
@@ -31,21 +32,31 @@ def add_numbers(file_name):
     create_csv(file_name, [ph, temperature, do, ec])
     print("Data saved successfully!")
 
-def view_numbers(file_name):
+# def view_numbers(file_name):
+#     print("Previous entries")
+#     with open(file_name, "r") as csvfile:
+#         reader = csv.reader(csvfile)
+#         print("Date\t\tpH\tTemp\tDO\tEC")
+#         next(reader)
+#         for row in reader:
+#             print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
+
+# def get_data(file_name):
+#     with open(file_name, "r") as csvfile:
+#         reader = csv.reader(csvfile)
+#         # Skip header if it exists
+#         next(reader)
+#         data = [row for row in reader]
+#     return data
+
+def show_numbers(file_name):
     print("Previous entries")
     with open(file_name, "r") as csvfile:
         reader = csv.reader(csvfile)
-        print("Date\t\tpH\tTemp\tDO\tEC")
+        if next(reader)[0].lower() == "date":
+            next(reader)
         for row in reader:
-            print(f"{row[0]}\t\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
-
-def get_data(file_name):
-    with open(file_name, "r") as csvfile:
-        reader = csv.reader(csvfile)
-        # Skip header if it exists
-        next(reader)
-        data = [row for row in reader]
-    return data
+            print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
 
 def print_entry(entry):
     line_number, date, ph, temperature, do, ec = entry
@@ -72,7 +83,7 @@ def remove_numbers(file_name):
     try:
       line_number = int(input("Enter line number to remove (1-based): "))
       if 0 < line_number <= len(get_data(file_name)):
-        entry = get_data(file_name)[line_number - 1]
+        entry = show_numbers(file_name)[line_number - 1]
         print(f"\nPreview of entry to be removed (line {line_number}):")
         print_entry(entry)
         confirm = input("\nAre you sure you want to remove this entry? (y/N) ")
@@ -89,7 +100,7 @@ def remove_numbers(file_name):
       print("Invalid input. Please enter a valid integer.")
 
 def analysis(file_name):
-    with open(filename, "r") as csvfile:
+    with open(file_name, "r") as csvfile:
         reader = csv.reader(csvfile)
         next(reader)  # Skip header
         data = list(reader)

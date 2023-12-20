@@ -1,6 +1,6 @@
 
-from statistics import mean, median, stdev
-from functions import add_numbers, view_numbers, remove_numbers, analysis
+
+from functions import add_numbers, show_numbers, remove_numbers, analysis
 
 
 file_name = "data.csv"
@@ -33,18 +33,18 @@ while user_choice != "5":
     if (user_choice == "1"):
         add_numbers(file_name)
     elif (user_choice == "2"):
-        view_numbers(file_name)
+        show_numbers(file_name)
     elif (user_choice == "3"):
         try:
             line_number = int(input("Enter line number to remove (1-based): "))
-            if 0 < line_number <= len(get_data(file_name)):
+            if 0 < line_number <= len(show_numbers(file_name)):
                 remove_numbers(file_name, line_number)
             else:
-                print(f"Invalid line number. Please enter a valid value between 1 and {len(get_data(file_name))}")
+                print(f"Invalid line number. Please enter a valid value between 1 and {len(show_numbers(file_name))}")
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
     elif (user_choice == "4"):
-        if len(get_data(file_name)) > 1:
+        if len(show_numbers(file_name)) > 1:
             analysis(file_name)
         else:
             print("No data available for analysis. Please add some entries first.")
