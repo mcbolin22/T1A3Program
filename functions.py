@@ -142,12 +142,31 @@ def remove_numbers(file_name, line_number):
 def analysis(file_name):
     with open(file_name, "r") as csvfile:
         reader = csv.reader(csvfile)
-        next(reader)  # Skip header
+        next(reader)  # Skip the header row
         data = list(reader)
+
+        # Extract only the numeric values (pH, temperature, DO, EC) from each row
+        data = [[float(value) for value in row[1:]] for row in data]  # Skip the first column (date)
+
         ph_vals, temp_vals, do_vals, ec_vals = zip(*data)
+
         print("pH:")
         print(f"\tMean: {mean(ph_vals):.2f}")
         print(f"\tMedian: {median(ph_vals):.2f}")
         print(f"\tStandard deviation: {stdev(ph_vals):.2f}")
 
+        print("Temperature:")
+        print(f"\tMean: {mean(temp_vals):.2f}")
+        print(f"\tMedian: {median(temp_vals):.2f}")
+        print(f"\tStandard deviation: {stdev(temp_vals):.2f}")
+
+        print("DO:")
+        print(f"\tMean: {mean(do_vals):.2f}")
+        print(f"\tMedian: {median(do_vals):.2f}")
+        print(f"\tStandard deviation: {stdev(do_vals):.2f}")
+
+        print("EC:")
+        print(f"\tMean: {mean(ec_vals):.2f}")
+        print(f"\tMedian: {median(ec_vals):.2f}")
+        print(f"\tStandard deviation: {stdev(ec_vals):.2f}")
 
