@@ -51,21 +51,23 @@ def add_numbers(file_name):
 
 def show_numbers(file_name):
     print("Previous entries")
+    print("Date\t\tpH\tTemp\tDO\tEC")
     with open(file_name, "r") as csvfile:
         reader = csv.reader(csvfile)
-        if next(reader)[0].lower() == "date":
-            next(reader)
-        for row in reader:
+        data = list(reader)
+        if data and data[0][0].lower() == "date":
+            data = data[1:]
+        for row in data:
             print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
+    return data
 
 def print_entry(entry):
-    line_number, date, ph, temperature, do, ec = entry
-    print(f"Line {line_number}:")
-    print(f"\tDate: {date}")
-    print(f"\tpH: {ph:.2f}")
-    print(f"\tTemperature: {temperature:.2f}°C")
-    print(f"\tDissolved oxygen: {do:.2f} mg/L")
-    print(f"\tElectrical conductivity: {ec:.2f} µS/cm")
+    date, ph, temperature, do, ec = entry  # Handle the list structure
+    print(f"Date: {date}")
+    print(f"pH: {ph:.2f}")
+    print(f"Temperature: {temperature:.2f}°C")
+    print(f"Dissolved oxygen: {do:.2f} mg/L")
+    print(f"Electrical conductivity: {ec:.2f} µS/cm")
 
 def delete_line(file_name, line_number):
     with open(file_name, "r") as csvfile:
@@ -78,26 +80,64 @@ def delete_line(file_name, line_number):
         writer.writerows(data)
 
 
-def remove_numbers(file_name):
-  while True:
-    try:
-      line_number = int(input("Enter line number to remove (1-based): "))
-      if 0 < line_number <= len(get_data(file_name)):
-        entry = show_numbers(file_name)[line_number - 1]
-        print(f"\nPreview of entry to be removed (line {line_number}):")
-        print_entry(entry)
-        confirm = input("\nAre you sure you want to remove this entry? (y/N) ")
-        if confirm.lower() == "y":
-          delete_line(file_name, line_number)
-          print(f"\nEntry on line {line_number} successfully removed!")
-          break
-        else:
-          print("\nEntry remains unchanged.")
-          break
-      else:
-        print(f"Invalid line number. Please enter a valid value between 1 and {len(get_data(file_name))}")
-    except ValueError:
-      print("Invalid input. Please enter a valid integer.")
+# def remove_numbers(file_name):
+#   while True:
+#     try:
+#       line_number = int(input("Enter line number to remove (1-based): "))
+#       data = show_numbers(file_name)
+#       if 0 < line_number <= len(show_numbers(file_name)):
+#         entry = show_numbers(file_name)[line_number - 1]
+#         print(f"\nPreview of entry to be removed (line {line_number}):")
+#         print_entry(entry)
+#         confirm = input("\nAre you sure you want to remove this entry? (y/N) ")
+#         if confirm.lower() == "y":
+#           delete_line(file_name, line_number)
+#           print(f"\nEntry on line {line_number} successfully removed!")
+#           break
+#         else:
+#           print("\nEntry remains unchanged.")
+#           break
+#       else:
+#         print(f"Invalid line number. Please enter a valid value between 1 and {len(show_numbers(file_name))}")
+#     except ValueError:
+#       print("Invalid input. Please enter a valid integer.")
+
+def remove_numbers(file_name, line_number):
+    while True:
+        try:
+            data = show_numbers(file_name)  # Get the data once
+            print("Data retrieved from show_numbers:", data)  # Print the data
+
+            # Print the raw input and converted line number
+            raw_input = input("Enter line number to remove (1-based): ")
+            print("Raw input:", raw_input)
+            line_number = int(raw_input)
+            print("Converted line number:", line_number)
+
+            if 0 < line_number <= len(data):  # Check if line number is valid
+                entry = data[line_number - 1]  # Access the entry
+                print("Entry retrieved:", entry)  # Print the entry
+
+                print(f"\nPreview of entry to be removed (line {line_number}):")
+                print_entry((entry))  # Pass unpacked values
+                confirm = input("\nAre you sure you want to remove this entry? (y/N) ")
+                if confirm.lower() == "y":
+                    delete_line(file_name, line_number)
+                    print(f"\nEntry on line {line_number} successfully removed!")
+                    break
+                else:
+                    print("\nEntry remains unchanged.")
+                    break
+            else:
+                print(f"Invalid line number. Please enter a valid value between 1 and {len(data)}")
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+
+        # Exit prompt
+        exit_choice = input("\nDo you want to try removing another entry? (y/N): ")
+        if exit_choice.lower() != "y":
+            print("\nExiting remove_numbers function.")
+            break
 
 def analysis(file_name):
     with open(file_name, "r") as csvfile:
