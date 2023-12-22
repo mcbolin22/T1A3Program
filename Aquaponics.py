@@ -18,7 +18,7 @@ except FileNotFoundError:
 print("Welcome to the Aquaponics data tracker")
 
 def menu():
-    print("1. Enter 1 to add today's data")
+    print("\n1. Enter 1 to add today's data")
     print("2. Enter 2 to view previous data")
     print("3. Enter 3 to remove previous entries")
     print("4. Enter 4 to see analysis of stored data")

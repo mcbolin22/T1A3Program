@@ -61,13 +61,21 @@ def show_numbers(file_name):
             print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
     return data
 
+# def print_entry(entry):
+#     date, ph, temperature, do, ec = entry  # Handle the list structure
+#     print(f"Date: {date}")
+#     print(f"pH: {ph:.2f}")
+#     print(f"Temperature: {temperature:.2f}°C")
+#     print(f"Dissolved oxygen: {do:.2f} mg/L")
+#     print(f"Electrical conductivity: {ec:.2f} µS/cm")
+
 def print_entry(entry):
     date, ph, temperature, do, ec = entry  # Handle the list structure
     print(f"Date: {date}")
-    print(f"pH: {ph:.2f}")
-    print(f"Temperature: {temperature:.2f}°C")
-    print(f"Dissolved oxygen: {do:.2f} mg/L")
-    print(f"Electrical conductivity: {ec:.2f} µS/cm")
+    print(f"pH: {ph}")
+    print(f"Temperature: {temperature}°C")
+    print(f"Dissolved oxygen: {do} mg/L")
+    print(f"Electrical conductivity: {ec} µS/cm")
 
 def delete_line(file_name, line_number):
     with open(file_name, "r") as csvfile:
@@ -136,7 +144,7 @@ def remove_numbers(file_name, line_number):
         # Exit prompt
         exit_choice = input("\nDo you want to try removing another entry? (y/N): ")
         if exit_choice.lower() != "y":
-            print("\nExiting remove_numbers function.")
+            print("\nExiting remove numbers function.")
             break
 
 def analysis(file_name):
