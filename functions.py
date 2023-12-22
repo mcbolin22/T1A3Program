@@ -32,42 +32,19 @@ def add_numbers(file_name):
     create_csv(file_name, [ph, temperature, do, ec])
     print("Data saved successfully!")
 
-# def view_numbers(file_name):
-#     print("Previous entries")
-#     with open(file_name, "r") as csvfile:
-#         reader = csv.reader(csvfile)
-#         print("Date\t\tpH\tTemp\tDO\tEC")
-#         next(reader)
-#         for row in reader:
-#             print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
 
-# def get_data(file_name):
-#     with open(file_name, "r") as csvfile:
-#         reader = csv.reader(csvfile)
-#         # Skip header if it exists
-#         next(reader)
-#         data = [row for row in reader]
-#     return data
-
+    
 def show_numbers(file_name):
     print("Previous entries")
-    print("Date\t\tpH\tTemp\tDO\tEC")
     with open(file_name, "r") as csvfile:
         reader = csv.reader(csvfile)
         data = list(reader)
-        if data and data[0][0].lower() == "date":
-            data = data[1:]
+        if data and data[0][0].lower() == "date":  # Check for header
+            data = data[1:]  # Skip header if present
         for row in data:
             print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
     return data
 
-# def print_entry(entry):
-#     date, ph, temperature, do, ec = entry  # Handle the list structure
-#     print(f"Date: {date}")
-#     print(f"pH: {ph:.2f}")
-#     print(f"Temperature: {temperature:.2f}°C")
-#     print(f"Dissolved oxygen: {do:.2f} mg/L")
-#     print(f"Electrical conductivity: {ec:.2f} µS/cm")
 
 def print_entry(entry):
     date, ph, temperature, do, ec = entry  # Handle the list structure
@@ -78,59 +55,43 @@ def print_entry(entry):
     print(f"Electrical conductivity: {ec} µS/cm")
 
 def delete_line(file_name, line_number):
-    with open(file_name, "r") as csvfile:
-        reader = csv.reader(csvfile)
-        data = list(reader)
-    del data[line_number - 1]  # Adjust index for 1-based line number
-    with open(file_name, "w") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["Date", "pH", "Temperature", "DO", "EC"])
-        writer.writerows(data)
-
-
-# def remove_numbers(file_name):
-#   while True:
-#     try:
-#       line_number = int(input("Enter line number to remove (1-based): "))
-#       data = show_numbers(file_name)
-#       if 0 < line_number <= len(show_numbers(file_name)):
-#         entry = show_numbers(file_name)[line_number - 1]
-#         print(f"\nPreview of entry to be removed (line {line_number}):")
-#         print_entry(entry)
-#         confirm = input("\nAre you sure you want to remove this entry? (y/N) ")
-#         if confirm.lower() == "y":
-#           delete_line(file_name, line_number)
-#           print(f"\nEntry on line {line_number} successfully removed!")
-#           break
-#         else:
-#           print("\nEntry remains unchanged.")
-#           break
-#       else:
-#         print(f"Invalid line number. Please enter a valid value between 1 and {len(show_numbers(file_name))}")
-#     except ValueError:
-#       print("Invalid input. Please enter a valid integer.")
+  with open(file_name, "r") as csvfile:
+    reader = csv.reader(csvfile)
+    data = list(reader)
+  del data[line_number - 1]
+  with open(file_name, "a", newline="") as csvfile:  # Open in append mode
+    writer = csv.writer(csvfile)
+    writer.writerows(data)  # Write modified data without header
 
 def remove_numbers(file_name, line_number):
     while True:
         try:
-            data = show_numbers(file_name)  # Get the data once
-            print("Data retrieved from show_numbers:", data)  # Print the data
+            data = show_numbers(file_name)
 
             # Print the raw input and converted line number
             raw_input = input("Enter line number to remove (1-based): ")
-            print("Raw input:", raw_input)
             line_number = int(raw_input)
-            print("Converted line number:", line_number)
 
             if 0 < line_number <= len(data):  # Check if line number is valid
                 entry = data[line_number - 1]  # Access the entry
                 print("Entry retrieved:", entry)  # Print the entry
 
-                print(f"\nPreview of entry to be removed (line {line_number}):")
-                print_entry((entry))  # Pass unpacked values
                 confirm = input("\nAre you sure you want to remove this entry? (y/N) ")
                 if confirm.lower() == "y":
-                    delete_line(file_name, line_number)
+                    with open(file_name, "w", newline="") as csvfile:  # Open in write mode
+                        writer = csv.writer(csvfile)
+
+                        # Write the header if necessary (corrected logic for header check)
+                        # if data and data[0][0].lower() == "date":  # Check if the first row is the header
+                        #     writer.writerow(["Date", "pH", "Temperature", "DO", "EC"])  # Write the header
+                        
+                        writer.writerow(["Date", "pH", "Temperature", "DO", "EC"])
+
+                        # Write all lines except the one to be removed
+                        for i in range(len(data)):
+                            if i != line_number - 1:
+                                writer.writerow(data[i])
+
                     print(f"\nEntry on line {line_number} successfully removed!")
                     break
                 else:
@@ -146,6 +107,7 @@ def remove_numbers(file_name, line_number):
         if exit_choice.lower() != "y":
             print("\nExiting remove numbers function.")
             break
+
 
 def analysis(file_name):
     with open(file_name, "r") as csvfile:
