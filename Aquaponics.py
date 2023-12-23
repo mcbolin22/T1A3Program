@@ -1,11 +1,6 @@
-
-
 from functions import add_numbers, show_numbers, remove_numbers, analysis
 
-
 file_name = "data.csv"
-
-
 
 try:
     data_file = open(file_name, "r")
@@ -16,7 +11,7 @@ except FileNotFoundError:
     data_file.write("date,pH,temp,DO,EC")
     data_file.close()
     print("In except block")
-# try:
+
 print("Welcome to the Aquaponics data tracker")
 
 def menu():
@@ -40,14 +35,6 @@ while user_choice != "5":
         raw_input = input("Enter line number to remove (1-based): ")
         line_number = int(raw_input)
         remove_numbers(file_name, line_number)
-        # try:
-        #     line_number = int(input("Enter line number to remove (1-based): "))
-        #     if 0 < line_number <= len(show_numbers(file_name)):
-        #         remove_numbers(file_name, line_number)
-        #     else:
-        #         print(f"Invalid line number. Please enter a valid value between 1 and {len(show_numbers(file_name))}")
-        # except ValueError:
-        #     print("Invalid input. Please enter a valid integer.")
     elif (user_choice == "4"):
         if len(show_numbers(file_name)) > 1:
             analysis(file_name)
@@ -59,5 +46,3 @@ while user_choice != "5":
         print("Invalid Input")
 
 print("Have a nice day!")
-
-# except:

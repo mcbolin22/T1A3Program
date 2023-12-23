@@ -5,7 +5,7 @@ from statistics import mean, median, stdev
 def get_user_input(prompt, data_type, min_val, max_val):
   while True:
     try:
-      value = data_type(input(prompt + ": "))
+      value = data_type(input(prompt))
       if min_val is not None and value < min_val:
         print(f"Value must be at least {min_val}. Please enter again.")
       elif max_val is not None and value > max_val:
@@ -13,20 +13,22 @@ def get_user_input(prompt, data_type, min_val, max_val):
       else:
         return value
     except ValueError:
-      print("Invalid input. Please enter a valid " + data_type.__name__)
+      print("Invalid input. Please enter a valid number.")
+    except TypeError:
+      print("Invalid input. Please enter a valid number.")
 
 def create_csv(file_name, data):
   with open(file_name, "a") as csvfile:
     writer = csv.writer(csvfile)
     if not csvfile.tell():  # Check if file is empty (no header yet)
-      writer.writerow(["Date", "pH", "ammonia", "nitrite", "nitrate", "Temperature", "DO", "EC"])
+      writer.writerow(["Date", "pH", "Ammonia", "Nitrite", "Nitrate", "Temperature", "DO", "EC"])
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
     writer.writerow([current_date] + data)
 
 def add_numbers(file_name):
     print("Add today's numbers")
 
-    ph = get_user_input("Enter pH level:", float, 0, 14)
+    ph = get_user_input("Enter pH level: ", float, 0, 14)
 
     if ph < 6.6:
         print("**Warning: Take Action: add lime to boost pH level**")
@@ -35,7 +37,7 @@ def add_numbers(file_name):
         if ph > 8:
             print("**Danger! Add acid to lower pH level**")
 
-    ammonia = get_user_input("Enter ammonia (ppm):", float, 0, 5)  # Adjust max range as needed
+    ammonia = get_user_input("Enter ammonia (ppm): ", float, 0, 5) 
     if ammonia > 0.75:
         print("**High ammonia reading! Check for dead fish.**")
         if ammonia > 1:
@@ -43,53 +45,56 @@ def add_numbers(file_name):
         if ammonia > 2:
             print("**Warning! Toxic ammonia level. Change 1/3 of water immediately.**")
 
-    nitrite = get_user_input("Enter nitrite (ppm):", float, 0, 5)  # Adjust max range as needed
+    nitrite = get_user_input("Enter nitrite (ppm): ", float, 0, 5)  
     if nitrite > 0.75:
         print("**High nitrite reading! You may have damaged bacteria.**")
         if nitrite > 1:
             print("**Warning! Toxic nitrite level. Change 1/3 of water immediately.**")
 
-    nitrate = get_user_input("Enter nitrate (ppm):", float, 0, 100)  # Adjust max range as needed
+    nitrate = get_user_input("Enter nitrate (ppm): ", float, 0, 100)  # Adjust max range as needed
     if nitrate > 150:
         print("**Consider adding another grow bed to reduce nitrate levels.**")
     if nitrate > 300:
         print("**Warning! Nitrate level toxic for fish. Take immediate action.**")
 
-    temperature = get_user_input("Enter water temperature (°C):", float, 0, 100)
+    temperature = get_user_input("Enter water temperature (°C): ", float, 0, 100)
 
     if temperature < 4:
         print("**Warning! No bacterial activity will occur below 4°C.**")
         # ... (rest of temperature warnings as before)
 
-    do = get_user_input("Enter dissolved oxygen (mg/L):", float, 0, 20)
+    do = get_user_input("Enter dissolved oxygen (mg/L): ", float, 0, 20)
 
     if do < 5:
         print("**Oxygen level low! Fish may die. Raise water temp or check aeration systems.**")
 
-    ec = get_user_input("Enter electrical conductivity (µS/cm):", float, 0, 500)
+    ec = get_user_input("Enter electrical conductivity (µS/cm): ", float, 0, 500)
 
     create_csv(file_name, [ph, ammonia, nitrite, nitrate, temperature, do, ec])
 
     print("Data saved successfully!")
-
-
     
 def show_numbers(file_name):
     print("Previous entries")
+
+    print("Date\t\tpH\tAmmonia\tNitrite\tNitrate\tTemperature\tDO\tEC")  # Tab-separated header
+
     with open(file_name, "r") as csvfile:
         reader = csv.reader(csvfile)
-        data = list(reader)
-        if data and data[0][0].lower() == "date":  # Check for header
-            data = data[1:]  # Skip header if present
+        data = list(reader)[1:]  # Skip header if present
+
         for row in data:
-            print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}")
+            print(f"{row[0]}\t{row[1]}\t{row[2]}\t{row[3]}\t{row[4]}\t{row[5]}\t\t{row[6]}\t{row[7]}")
+    
     return data
 
-
 def print_entry(entry):
-    date, ph, temperature, do, ec = entry  # Handle the list structure
+    date, ph, ammonia, nitrite, nitrate, temperature, do, ec = entry  # Handle the list structure
     print(f"Date: {date}")
     print(f"pH: {ph}")
+    print(f"Ammonia: {ammonia}")
+    print(f"Nitrite: {nitrite}")
+    print(f"Nitrate: {nitrate}")
     print(f"Temperature: {temperature}°C")
     print(f"Dissolved oxygen: {do} mg/L")
     print(f"Electrical conductivity: {ec} µS/cm")
@@ -106,9 +111,10 @@ def delete_line(file_name, line_number):
 def remove_numbers(file_name, line_number):
     while True:
         try:
-            data = show_numbers(file_name)
+            # Get the data before prompting for line number to avoid errors
+            data = show_numbers(file_name)  # Retrieve data before input
 
-            # Print the raw input and converted line number
+            # Prompt for line number and validate
             raw_input = input("Enter line number to remove (1-based): ")
             line_number = int(raw_input)
 
@@ -121,16 +127,11 @@ def remove_numbers(file_name, line_number):
                     with open(file_name, "w", newline="") as csvfile:  # Open in write mode
                         writer = csv.writer(csvfile)
 
-                        # Write the header if necessary (corrected logic for header check)
-                        # if data and data[0][0].lower() == "date":  # Check if the first row is the header
-                        #     writer.writerow(["Date", "pH", "Temperature", "DO", "EC"])  # Write the header
-                        
-                        writer.writerow(["Date", "pH", "Temperature", "DO", "EC"])
+                        writer.writerow(["Date", "pH", "ammonia", "nitrite", "nitrate", "Temperature", "DO", "EC"])
 
-                        # Write all lines except the one to be removed
-                        for i in range(len(data)):
-                            if i != line_number - 1:
-                                writer.writerow(data[i])
+                        for row in data:  # Iterate through rows directly
+                            if row != entry:  # Skip the entry to be removed
+                                writer.writerow(row)
 
                     print(f"\nEntry on line {line_number} successfully removed!")
                     break
@@ -147,7 +148,6 @@ def remove_numbers(file_name, line_number):
         if exit_choice.lower() != "y":
             print("\nExiting remove numbers function.")
             break
-
 
 def analysis(file_name):
     with open(file_name, "r") as csvfile:
@@ -195,4 +195,3 @@ def analysis(file_name):
         print(f"\tMean: {mean(ec_vals):.2f}")
         print(f"\tMedian: {median(ec_vals):.2f}")
         print(f"\tStandard deviation: {stdev(ec_vals):.2f}")
-
