@@ -5,14 +5,14 @@ file_name = "data.csv"
 try:
     data_file = open(file_name, "r")
     data_file.close()
-    print("In try block")
+    print("data.csv found")
 except FileNotFoundError:
     data_file = open(file_name, "w")
-    data_file.write("date,pH,temp,DO,EC")
+    data_file.write("Date,pH,Ammonia,Nitrite,Nitrate,Temperature,DO,EC")
     data_file.close()
-    print("In except block")
+    print("data.csv created")
 
-print("Welcome to the Aquaponics data tracker")
+print("\nWelcome to the Aquaponics data tracker")
 
 def menu():
     print("\n1. Enter 1 to add today's data")
@@ -20,7 +20,7 @@ def menu():
     print("3. Enter 3 to remove previous entries")
     print("4. Enter 4 to see analysis of stored data")
     print("5. Enter 5 to exit")
-    choice = input("Enter your selection: ")
+    choice = input("\nEnter your selection: ")
     return choice
 
 user_choice = ""
@@ -32,8 +32,8 @@ while user_choice != "5":
     elif (user_choice == "2"):
         show_numbers(file_name)
     elif (user_choice == "3"):
-        raw_input = input("Enter line number to remove (1-based): ")
-        line_number = int(raw_input)
+        show_numbers(file_name)
+        line_number = int(input("Enter line number to remove (1-based): "))
         remove_numbers(file_name, line_number)
     elif (user_choice == "4"):
         if len(show_numbers(file_name)) > 1:
@@ -45,4 +45,4 @@ while user_choice != "5":
     else:
         print("Invalid Input")
 
-print("Have a nice day!")
+print("\nHave a nice day!")
