@@ -19,17 +19,57 @@ def create_csv(file_name, data):
   with open(file_name, "a") as csvfile:
     writer = csv.writer(csvfile)
     if not csvfile.tell():  # Check if file is empty (no header yet)
-      writer.writerow(["Date", "pH", "Temperature", "DO", "EC"])
+      writer.writerow(["Date", "pH", "ammonia", "nitrite", "nitrate", "Temperature", "DO", "EC"])
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
     writer.writerow([current_date] + data)
 
 def add_numbers(file_name):
     print("Add today's numbers")
+
     ph = get_user_input("Enter pH level:", float, 0, 14)
+
+    if ph < 6.6:
+        print("**Warning: Take Action: add lime to boost pH level**")
+    elif ph > 7:
+        print("**Warning: Nutrient lockout occurring**")
+        if ph > 8:
+            print("**Danger! Add acid to lower pH level**")
+
+    ammonia = get_user_input("Enter ammonia (ppm):", float, 0, 5)  # Adjust max range as needed
+    if ammonia > 0.75:
+        print("**High ammonia reading! Check for dead fish.**")
+        if ammonia > 1:
+            print("**Stop feeding fish until ammonia is below 0.75ppm.**")
+        if ammonia > 2:
+            print("**Warning! Toxic ammonia level. Change 1/3 of water immediately.**")
+
+    nitrite = get_user_input("Enter nitrite (ppm):", float, 0, 5)  # Adjust max range as needed
+    if nitrite > 0.75:
+        print("**High nitrite reading! You may have damaged bacteria.**")
+        if nitrite > 1:
+            print("**Warning! Toxic nitrite level. Change 1/3 of water immediately.**")
+
+    nitrate = get_user_input("Enter nitrate (ppm):", float, 0, 100)  # Adjust max range as needed
+    if nitrate > 150:
+        print("**Consider adding another grow bed to reduce nitrate levels.**")
+    if nitrate > 300:
+        print("**Warning! Nitrate level toxic for fish. Take immediate action.**")
+
     temperature = get_user_input("Enter water temperature (°C):", float, 0, 100)
+
+    if temperature < 4:
+        print("**Warning! No bacterial activity will occur below 4°C.**")
+        # ... (rest of temperature warnings as before)
+
     do = get_user_input("Enter dissolved oxygen (mg/L):", float, 0, 20)
+
+    if do < 5:
+        print("**Oxygen level low! Fish may die. Raise water temp or check aeration systems.**")
+
     ec = get_user_input("Enter electrical conductivity (µS/cm):", float, 0, 500)
-    create_csv(file_name, [ph, temperature, do, ec])
+
+    create_csv(file_name, [ph, ammonia, nitrite, nitrate, temperature, do, ec])
+
     print("Data saved successfully!")
 
 
@@ -115,15 +155,31 @@ def analysis(file_name):
         next(reader)  # Skip the header row
         data = list(reader)
 
-        # Extract only the numeric values (pH, temperature, DO, EC) from each row
         data = [[float(value) for value in row[1:]] for row in data]  # Skip the first column (date)
 
-        ph_vals, temp_vals, do_vals, ec_vals = zip(*data)
+        ph_vals, ammonia_vals, nitrite_vals, nitrate_vals, temp_vals, do_vals, ec_vals = zip(*data)
+
+        print("Data Analysis:")
 
         print("pH:")
         print(f"\tMean: {mean(ph_vals):.2f}")
         print(f"\tMedian: {median(ph_vals):.2f}")
         print(f"\tStandard deviation: {stdev(ph_vals):.2f}")
+
+        print("Ammonia:")
+        print(f"\tMean: {mean(ammonia_vals):.2f}")
+        print(f"\tMedian: {median(ammonia_vals):.2f}")
+        print(f"\tStandard deviation: {stdev(ammonia_vals):.2f}")
+
+        print("Nitrite:")
+        print(f"\tMean: {mean(nitrite_vals):.2f}")
+        print(f"\tMedian: {median(nitrite_vals):.2f}")
+        print(f"\tStandard deviation: {stdev(nitrite_vals):.2f}")
+
+        print("Nitrate:")
+        print(f"\tMean: {mean(nitrate_vals):.2f}")
+        print(f"\tMedian: {median(nitrate_vals):.2f}")
+        print(f"\tStandard deviation: {stdev(nitrate_vals):.2f}")
 
         print("Temperature:")
         print(f"\tMean: {mean(temp_vals):.2f}")
