@@ -2,6 +2,10 @@
 
 https://github.com/mcbolin22/T1A3Program
 
+## Presentation link:
+
+https://vimeo.com/897550285/085109147a?share=copy
+
 ## Concept:
 I'm thinking of doing my app on an aquaponics interface that will input water temperature, pH and nutrient levels. Give advice based on those outputs and store the data that has been produced for analysis ie averages. I can scale the complexity up or down in terms of app content to meet the rubric requirements.
 
