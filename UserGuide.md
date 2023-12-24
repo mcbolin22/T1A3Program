@@ -90,9 +90,20 @@ Readings above 1 are a good indication of nutrient availability in the water and
 These inputs are stored within a csv file for later use. The user is then taken back to the main menu. The next Menu options will show what we can do with these entries.
 
 ### Option 2
-Option 2 allows the user to view the previous data within the csv file then returns the user to the main menu.
+Selecting 2 allows the user to view the previous data within the csv file then returns the user to the main menu.
 
 ### Option 3
+Selecting 3 allows the user to delete a previous entry and appears as follows:
+
+- User is shown the previous entries and is asked to enter the line number they are looking to delete.
+
+- User is asked to confirm the line they are looking to delete.
+
+- User is shown the line they have selected and asked if they want to delete that line with a Y/N prompt.
+
+- Line is deleted and/or user is returned to the main menu.
+
+### Option 4
 
 
 
