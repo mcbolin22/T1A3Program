@@ -60,12 +60,23 @@ Optimal bacterial growth is within the range of 25-30 degrees C
 Root zone temperature differs between plant species but don't range outside 18 - 25 degrees C
 
 Depending on fish species present depends on the preferable temperature.
-One of the most common species used within aquaponics is Talapia which are comfortable at 24 - 29 degrees C being a tropical freshwater fish.
+One of the most common species used within aquaponics is Tilapia which are comfortable at 24 - 29 degrees C being a tropical freshwater fish.
 
-Optimal Temperatures for a system with Talapia for example would be 25 degrees C that would keep the plants fish and bacteria all comfortable.
+Optimal Temperatures for a system with Tilapia for example would be 25 degrees C that would keep the plants fish and bacteria all comfortable.
 
 ### Dissolved Oxygen (DO)
+The number 1 cause of fish death and therefore system failure is a lack of oxygen in the system. There is a direct correlation between water temperature and the amount of oxygen available in it. The warmer the water the more the Dissolved Oxygen (DO) will drop.
 
+To ensure that there is a good level DO is measured.
+Different species require different saturation levels of oxygen. Cold water species such as Trout require 70% saturation or 6mg/L.
+Tropical species such as Tilapia require 80% saturation or 5mg/L.
+
+Therefore any reading below 5 will result in a warning to check equipment or lower temperature. Any level less than 5 will result in a tank of dead fish.
+
+### Electrical Conductivity (EC)
+There are more ways to measure nutrients in the water than just Nitrate. A healthy system require other minerals that are present as salts in the system. Salts are measured with a device and a reading of electrical current is returned.
+
+Readings above 1 are a good indication of nutrient availability in the water and good to keep a record of.
 
 
 

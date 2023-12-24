@@ -81,7 +81,7 @@ def add_numbers(file_name):
 
     do = get_user_input("Enter dissolved oxygen (mg/L): ", float, 0, 20)
     if do < 5:
-        print("Oxygen level low! Fish may die. Raise water temp or check aeration systems.")
+        print("Oxygen level low! Fish may die. Lower water temp or check aeration systems.")
 
     ec = get_user_input("Enter electrical conductivity (µS/cm): ", float, 0, 500)
     if ec == 0:
