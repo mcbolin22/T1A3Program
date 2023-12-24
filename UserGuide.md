@@ -104,6 +104,9 @@ Selecting 3 allows the user to delete a previous entry and appears as follows:
 - Line is deleted and/or user is returned to the main menu.
 
 ### Option 4
+Selecting 4 will analyse of all the data collected from each variable and will return a mean,median and standard deviation for each. The user will then be returned to the main menu.
+
+### Option 5
 
 
 
