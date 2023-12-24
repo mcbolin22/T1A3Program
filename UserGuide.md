@@ -27,7 +27,7 @@ To use this program you run the script Aquaponics.py follow the prompts.
 Selecting 1 will add your data for today. As above the prompt will ask you for the 7 key variables and provide comments on the input given by you the user.
 
 ### pH
-Recommended pH levels for an aquaponics system ranges between 6.5 - 7.0.
+Recommended pH levels for an aquaponics system ranges between 6.5 - 7.0. This keeps all organisms within the ecosystem happy (Bacteria, fish and plants).
 Readings above 7 are troublesome to the plants within the system in terms of drawing nutrients from the water. This is referred to as "Nutrient lockout". 
 Readings above 8 are dangerous for everything in the system. High pH readings are fixed by adding acid such as hydrochloric to the system.
 Readings below 5 are dangerous for everything and readings below 6.5 are dangerous for fish. Low pH readings are fixed by adding limestone to the system.
@@ -50,9 +50,22 @@ High Nitrate levels are fixed by planting more plants.
 
 ### Temperature
 Since there are multiple organisms cohabitating in this ecosystem all must be kept at a comfortable temperature.
+
 Nitrifying bacteria die above 49 degrees C and below 0 degrees C
 Below 4 degrees C there is no bacterial activity
 Bacterial growth is slowed by 75% between 8-10 degrees C
 Bacterial growth is slowed by 50% below 18 degrees C
+Optimal bacterial growth is within the range of 25-30 degrees C
+
+Root zone temperature differs between plant species but don't range outside 18 - 25 degrees C
+
+Depending on fish species present depends on the preferable temperature.
+One of the most common species used within aquaponics is Talapia which are comfortable at 24 - 29 degrees C being a tropical freshwater fish.
+
+Optimal Temperatures for a system with Talapia for example would be 25 degrees C that would keep the plants fish and bacteria all comfortable.
+
+### Dissolved Oxygen (DO)
+
+
 
 
