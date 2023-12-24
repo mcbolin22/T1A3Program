@@ -8,13 +8,13 @@ Aquaponics is a combination of Hydroponics (growing plants in water) and Aquacul
 
 An Aquaponics system must have 7 key variables in balance in order to maintain a healthy ecosystem.
 
-pH: the acid/base balance of the system.
-Ammonia: The amount of ammonia that will be transformed into Nitrite. Toxic to fish.
-Nitrite: The amount of Nitrite that will be transformed into Nitrate. Very toxic to fish.
-Nitrate: The amount of Nitrate available to the plants that will use them as nutrients.
-Water temperature: ensuring a liveable temperatures for all inhabitants of the system.
-Dissolved oxygen (DO): The amount of oxygen molecules available in the water.
-Conductivity (EC): The electrical current measures the "salts" in the water, not actual salt but the reactivity of the nutrients available that also conduct electricity.
+1. **pH:** the acid/base balance of the system.
+2. **Ammonia:** The amount of ammonia that will be transformed into Nitrite. Toxic to fish.
+3. **Nitrite:** The amount of Nitrite that will be transformed into Nitrate. Very toxic to fish.
+4. **Nitrate:** The amount of Nitrate available to the plants that will use as nutrients.
+5. **Water temperature:** ensuring a liveable temperatures for all inhabitants of the system.
+6. **Dissolved oxygen (DO):** The amount of oxygen molecules available in the water.
+7. **Electrical Conductivity (EC):** The electrical current measures the "salts" in the water, not actual salt but the reactivity of the nutrients available that also conduct electricity.
 
 A healthy Aquaponics ecosystems most important factor are nitrifying bacteria, their health is paramount to the success of the system. Without them the water would be uninhabitable for fish and the plants would get no nutrients from the water.
 
@@ -107,6 +107,8 @@ Selecting 3 allows the user to delete a previous entry and appears as follows:
 Selecting 4 will analyse of all the data collected from each variable and will return a mean,median and standard deviation for each. The user will then be returned to the main menu.
 
 ### Option 5
+Selecting 5 will exit the application.
 
+**Thank you for reading this user guide.**
 
 
