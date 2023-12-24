@@ -24,31 +24,38 @@ The program I have designed will track these variables, store them and give basi
 
 To use this program you run the script Aquaponics.py follow the prompts.
 
+### Option 1
+
 Selecting 1 will add your data for today. As above the prompt will ask you for the 7 key variables and provide comments on the input given by you the user.
 
-### pH
+#### pH
+
 Recommended pH levels for an aquaponics system ranges between 6.5 - 7.0. This keeps all organisms within the ecosystem happy (Bacteria, fish and plants).
 Readings above 7 are troublesome to the plants within the system in terms of drawing nutrients from the water. This is referred to as "Nutrient lockout". 
 Readings above 8 are dangerous for everything in the system. High pH readings are fixed by adding acid such as hydrochloric to the system.
 Readings below 5 are dangerous for everything and readings below 6.5 are dangerous for fish. Low pH readings are fixed by adding limestone to the system.
 
-### Ammonia
+#### Ammonia
+
 Recommended levels of ammonia are below 0.75ppm due to being toxic to fish.
 Readings above 0.75 could indicate a dead fish somewhere in the fish tank.
 Readings above 1 require the user to stop feeding the fish until the levels have decreased below 0.75 due to fish feed adding ammonia to the system.
 Readings above 2 are toxic to fish, to fix this the user must change 1/3 of the total water in the aquaponics system.
 
-### Nitrite
+#### Nitrite
+
 Recommended levels of nitrite are below 0.75ppm due to being very toxic to fish.
 Readings above 0.75 could indicate damaged nitrifying bacteria.
 Readings above 1 are toxic to fish, to fix this the user must change 1/3 of the total water in the aquaponics system.
 
-### Nitrate
+#### Nitrate
+
 Recommended levels of nitrate are below 300ppm due to being much less toxic to fish.
 Readings above 150 indicate there are not enough plants in the system taking up the nutrients.
 High Nitrate levels are fixed by planting more plants.
 
-### Temperature
+#### Temperature
+
 Since there are multiple organisms cohabitating in this ecosystem all must be kept at a comfortable temperature.
 
 Nitrifying bacteria die above 49 degrees C and below 0 degrees C
@@ -64,7 +71,8 @@ One of the most common species used within aquaponics is Tilapia which are comfo
 
 Optimal Temperatures for a system with Tilapia for example would be 25 degrees C that would keep the plants fish and bacteria all comfortable.
 
-### Dissolved Oxygen (DO)
+#### Dissolved Oxygen (DO)
+
 The number 1 cause of fish death and therefore system failure is a lack of oxygen in the system. There is a direct correlation between water temperature and the amount of oxygen available in it. The warmer the water the more the Dissolved Oxygen (DO) will drop.
 
 To ensure that there is a good level DO is measured.
@@ -73,10 +81,16 @@ Tropical species such as Tilapia require 80% saturation or 5mg/L.
 
 Therefore any reading below 5 will result in a warning to check equipment or lower temperature. Any level less than 5 will result in a tank of dead fish.
 
-### Electrical Conductivity (EC)
+#### Electrical Conductivity (EC)
+
 There are more ways to measure nutrients in the water than just Nitrate. A healthy system require other minerals that are present as salts in the system. Salts are measured with a device and a reading of electrical current is returned.
 
 Readings above 1 are a good indication of nutrient availability in the water and good to keep a record of.
+
+These inputs are stored within a csv file for later use. The next Menu options will show what we can do with these entries.
+
+### Option 2
+
 
 
 
