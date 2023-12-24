@@ -22,7 +22,7 @@ The program I have designed will track these variables, store them and give basi
 
 ## Using the app
 
-To use this program you run the script Aquaponics.py follow the prompts.
+To use this program you run the script Aquaponics.py and follow the prompts in the terminal.
 
 ### Option 1
 
