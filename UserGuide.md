@@ -87,10 +87,12 @@ There are more ways to measure nutrients in the water than just Nitrate. A healt
 
 Readings above 1 are a good indication of nutrient availability in the water and good to keep a record of.
 
-These inputs are stored within a csv file for later use. The next Menu options will show what we can do with these entries.
+These inputs are stored within a csv file for later use. The user is then taken back to the main menu. The next Menu options will show what we can do with these entries.
 
 ### Option 2
+Option 2 allows the user to view the previous data within the csv file then returns the user to the main menu.
 
+### Option 3
 
 
 
